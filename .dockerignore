@@ -1,0 +1,13 @@
+# anything not excluded will be copied to the image if there is a COPY instruction in the Dockerfile
+
+# git
+.git
+.gitignore
+
+# docker
+.dockerignore
+Dockerfile*
+
+# misc
+LICENSE
+README.md
