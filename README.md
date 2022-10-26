@@ -1,6 +1,53 @@
 # docker-windows-sbt
 A Docker image, based on Windows, that contains PowerShell, Java, the Scala-build tool (SBT), and Git.
 
+## Usage
+
+Environment variables:
+```powershell
+$env:GITHUB_ACCOUNT
+$env:GITHUB_TOKEN
+```
+
+Local variables:
+```powershell
+$APP_NAME='windows-sbt'
+$SBT_VERSION='1.6.2'
+$GIT_VERSION='2.38.1'
+$JDK_VERSION='11.0.16.1'
+```
+
+### Build
+
+Using PowerShell:
+```powershell
+docker build `
+	--build-arg "SBT_VERSION=$SBT_VERSION" `
+	--build-arg "GIT_VERSION=$GIT_VERSION" `
+	--build-arg "JDK_VERSION=$JDK_VERSION" `
+	--tag "ghcr.io/$($env:GITHUB_ACCOUNT)/$APP_NAME" `
+	--tag "$APP_NAME`:latest" `
+	.
+```
+
+Using Psake:
+```powershell
+Invoke-Psake build
+```
+
+### Publish (image)
+Using PowerShell:
+```powershell
+$env:GITHUB_TOKEN | docker login ghcr.io -u $env:GITHUB_ACCOUNT --password-stdin
+docker tag $APP_NAME "ghcr.io/$($env:GITHUB_ACCOUNT)/$APP_NAME"
+docker push "ghcr.io/$($env:GITHUB_ACCOUNT)/$APP_NAME`:latest"
+```
+
+Using Psake:
+```powershell
+Invoke-Psake publish
+```
+
 ## msiexec
 ```
 Windows ® Installer. V 5.0.19041.1 
