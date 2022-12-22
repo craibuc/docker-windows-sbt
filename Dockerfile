@@ -1,6 +1,8 @@
-FROM mcr.microsoft.com/windows/servercore:20H2-amd64
+ARG WIN_VERSION=ltsc2019-amd64
 
-ARG SBT_VERSION=1.6.2
+FROM mcr.microsoft.com/windows/servercore:${WIN_VERSION}
+
+ARG SBT_VERSION=1.8.0
 ARG GIT_VERSION=2.38.1
 ARG JDK_VERSION=11.0.16.1
 
@@ -12,7 +14,7 @@ WORKDIR /temp
 
 # retrieve and install package
 RUN curl -L -o Git-%GIT_VERSION%-64-bit.exe https://github.com/git-for-windows/git/releases/download/v%GIT_VERSION%.windows.1/Git-%GIT_VERSION%-64-bit.exe
-RUN Git-%GIT_VERSION%-64-bit.exe /VERYSILENT /NORESTART
+RUN .\Git-%GIT_VERSION%-64-bit.exe /VERYSILENT /NORESTART
 
 # RUN scoop install git
 
