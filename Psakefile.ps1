@@ -1,8 +1,9 @@
 Properties {
-    $APP_NAME='windows-sbt'
+    $WIN_VERSION='ltsc2019-amd64'
     $SBT_VERSION='1.6.2'
     $GIT_VERSION='2.38.1'
     $JDK_VERSION='11.0.16.1'
+    $APP_NAME='windows-sbt'
 }
 
 # 
@@ -10,10 +11,10 @@ Properties {
 Task Build {
 	Write-Host 'Building image...'
     docker build `
+        --build-arg "WIN_VERSION=$WIN_VERSION" `
         --build-arg "SBT_VERSION=$SBT_VERSION" `
         --build-arg "GIT_VERSION=$GIT_VERSION" `
         --build-arg "JDK_VERSION=$JDK_VERSION" `
-        --tag "ghcr.io/$($env:GITHUB_ACCOUNT)/$APP_NAME" `
         --tag "$APP_NAME`:latest" `
         .
 }
