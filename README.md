@@ -13,7 +13,6 @@ Local variables:
 ```powershell
 $SCALA_VERSION='2.13.10'
 $SBT_VERSION='1.6.2'
-$GIT_VERSION='2.38.1'
 $JDK_VERSION='11.0.16.1'
 $APP_NAME='windows-sbt'
 ```
